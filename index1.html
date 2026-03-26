@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraj Sute | AWS Cloud Engineer Portfolio</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Variables & AWS Theme --- */
+        :root {
+            --aws-orange: #FF9900;
+            --aws-navy: #232F3E;
+            --aws-dark-blue: #1A2B3C;
+            --aws-light-blue: #48A1B5; /* Complementary accent */
+            --aws-white: #FFFFFF;
+            --aws-gray: #F2F3F3;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --transition-speed: 0.3s;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--aws-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--aws-navy);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--aws-orange);
+            margin: 10px auto 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--aws-orange);
+            color: var(--aws-navy);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 4px;
+            transition: background var(--transition-speed);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e88b00;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--aws-orange);
+            color: var(--aws-orange);
+            margin-left: 10px;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--aws-orange);
+            color: var(--aws-navy);
+        }
+
+        /* --- Animation Control Panel --- */
+        .anim-control-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--aws-navy);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .anim-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--aws-orange);
+            cursor: pointer;
+            font-size: 1.2rem;
+            align-self: flex-end;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--aws-orange);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* --- Header / Hero --- */
+        header {
+            background: var(--aws-navy);
+            color: var(--aws-white);
+            padding: 40px 0 30px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #aa4646;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+        }
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--aws-orange);
+            object-fit: cover;
+            background-color: #640c0c;
+            margin: 0;
+            flex-shrink: 0;
+        }
+        .header-center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--aws-white);
+            text-align: center;
+        }
+        .hero-role {
+            font-size: 1.2rem;
+            color: var(--aws-orange);
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .header-contact {
+            margin: 8px 0 0 0;
+            color: var(--text-light);
+            font-size: 1rem;
+            text-align: center;
+        }
+        .header-social {
+            margin-top: 10px;
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+        }
+        .header-social a {
+            color: var(--aws-navy);
+            font-size: 1.3rem;
+            transition: color 0.3s;
+        }
+        .header-social a:hover {
+            color: var(--aws-orange);
+        }
+        @media (max-width: 768px) {
+            .header-flex {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .profile-img {
+                margin-bottom: 10px;
+            }
+        }
+
+        .hero-name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero-role {
+            font-size: 1.5rem;
+            color: var(--aws-orange);
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--aws-orange);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            background-color: var(--aws-white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: var(--aws-navy);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .resume-link {
+            background-color: var(--aws-light-blue);
+            color: var(--aws-white) !important;
+            border-radius: 4px;
+            font-weight: 70;
+            margin-left: 30px;
+            padding: 10px 26px !important;
+            transition: background 0.3s, color 0.3s;
+            box-shadow: 0 2px 8px rgba(72,161,181,0.12);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .resume-link:hover {
+            background-color: var(--aws-navy);
+            color: var(--aws-orange) !important;
+        }
+        }
+
+        nav ul li a:hover {
+            color: var(--aws-orange);
+            background-color: var(--aws-gray);
+        }
+
+        /* --- Sections General --- */
+        section {
+            padding: 60px 0;
+        }
+
+        /* --- About / Objective --- */
+        #about {
+            background-color: var(--aws-white);
+        }
+
+        .objective-box {
+            background: var(--aws-gray);
+            padding: 30px;
+            border-left: 5px solid var(--aws-orange);
+            border-radius: 4px;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Skills --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--aws-white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            border-top: 4px solid transparent;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-top: 4px solid var(--aws-orange);
+        }
+
+        .skill-card h3 {
+            color: var(--aws-navy);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background-color: var(--aws-gray);
+            color: var(--text-dark);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* --- Experience & Education --- */
+        #experience, #education {
+            background-color: var(--aws-white);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--aws-gray);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 20px;
+            background-color: var(--aws-white);
+            border: 4px solid var(--aws-orange);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            transform: translateX(-50%);
+        }
+
+        .content-box {
+            padding: 20px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #eee;
+        }
+
+        .date {
+            color: var(--aws-orange);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .role {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--aws-navy);
+        }
+
+        .company {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        /* --- Projects --- */
+        #projects {
+            background-color: var(--aws-gray);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--aws-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            height: 180px;
+            background-color: #ddd;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-info h3 {
+            color: var(--aws-navy);
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .tech-stack {
+            margin-bottom: 15px;
+        }
+
+        .tech-stack span {
+            font-size: 0.8rem;
+            color: var(--aws-navy);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* --- Certifications & Strengths --- */
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .cert-list, .strength-list {
+            list-style: none;
+        }
+
+        .cert-list li, .strength-list li {
+            background: var(--aws-white);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 3px solid var(--aws-orange);
+            display: flex;
+            align-items: center;
+        }
+
+        .cert-list li i, .strength-list li i {
+            color: var(--aws-orange);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--aws-navy);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--aws-orange);
+        }
+
+        /* --- Animation Classes --- */
+        /* Default hidden state */
+        .anim-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* Visible state */
+        .anim-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Fade In Left variant */
+        .anim-left {
+            transform: translateX(-50px);
+        }
+        .anim-left.anim-visible {
+            transform: translateX(0);
+        }
+
+        /* No animation class (applied via JS toggle) */
+        .no-anim {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-name { font-size: 2.2rem; }
+            .grid-2-col { grid-template-columns: 1fr; }
+            .timeline::after { left: 20px; }
+            .timeline-item::after { left: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animation Settings Panel -->
+    <div class="anim-control-panel" id="animPanel">
+        <button class="anim-toggle-btn" onclick="togglePanel()">
+            <i class="fa-solid fa-gear"></i>
+        </button>
+        <div id="panelContent">
+            <h4 style="margin-bottom:10px; color:var(--aws-orange);">View Options</h4>
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span>Animations</span>
+                <label class="switch">
+                    <input type="checkbox" id="animSwitch" checked onchange="toggleAnimations()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header>
+        <div class="header-flex">
+            
+            <img src="image/photos.jpg" alt="Suraj Sute" class="profile-img">
+            <div class="header-center">
+                <h1 class="hero-name">Suraj Premdas Sute</h1>
+                <p class="hero-role">AWS Cloud Engineer | Web Developer</p>
+                 <li style="margin-left:auto;"><a href="image/Resume.pdf" class="resume-link" download><i class="fa-solid fa-download"></i> Resume</a></li>
+                
+                <div class="header-contact">
+                    <div><i class="fa-solid fa-phone"></i> +91 8855975695</div>
+                    <div><i class="fa-solid fa-envelope"></i> www.surajsute2@gmail.com</div>
+                    <div><i class="fa-solid fa-location-dot"></i> At-Sewagram, Dist- Wardha, Maharashtra, India</div>
+                </div>
+                <div class="header-social">
+                    <a href="mailto:www.surajsute2@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/suraj-sute-ba398ba3" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/surajsute20" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul style="width:100%;">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+           
+        </ul>
+    </nav>
+
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">Career Objective</h2>
+                <div class="objective-box scroll-anim anim-hidden">
+                    <p>Aspiring Cloud Engineer with knowledge of AWS services, Python programming, and web technologies. Seeking an entry-level Cloud Computing or AWS role to apply technical and problem-solving skills while gaining hands-on experience in cloud infrastructure, deployment, and automation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-grid">
+                    <!-- Cloud Computing -->
+                    <div class="skill-card scroll-anim anim-hidden anim-left">
+                        <h3><i class="fa-solid fa-cloud" style="color: var(--aws-orange);"></i> Cloud Computing</h3>
+                        <div class="skill-tags">
+                            <span class="tag">AWS EC2</span>
+                            <span class="tag">S3</span>
+                            <span class="tag">IAM</span>
+                            <span class="tag">VPC</span>
+                            <span class="tag">RDS</span>
+                            <span class="tag">Lambda</span>
+                            <span class="tag">CloudFront</span>
+                            <span class="tag">Route 53</span>
+                            <span class="tag">ECS</span>
+                            <span class="tag">Amazon Q</span>
+                            <span class="tag">DynamoDB</span>
+                            <span class="tag">EKS</span>
+                        
+                        </div>
+                    </div>
+
+                    <!-- Programming -->
+                    <div class="skill-card scroll-anim anim-hidden">
+                        <h3><i class="fa-solid fa-code" style="color: var(--aws-orange);"></i> Development</h3>
+                        <div class="skill-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Linux (Basic)</span>
+                            <span class="tag">SQLite</span>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="skill-card scroll-anim anim-hidden anim-left">
+                        <h3><i class="fa-solid fa-toolbox" style="color: var(--aws-orange);"></i> Tools</h3>
+                        <div class="skill-tags">
+                            <span class="tag">Git & GitHub</span>
+                            <span class="tag">VS Code</span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                <div class="projects-grid">
+                    
+                    <!-- Project: Static Portfolio Website Hosting on AWS -->
+                    <div class="project-card scroll-anim anim-hidden">
+                        <div class="project-img">
+                            <img src="image/static-website.png" alt="AWS Portfolio Hosting">
+                        </div>
+                        <div class="project-info">
+                            <h3>Static Portfolio Website Hosting on AWS</h3>
+                            <div class="tech-stack">
+                                <span>AWS S3</span> <span>CloudFront</span> <span>Route 53</span> <span>IAM</span>
+                            </div>
+                            <p class="project-desc">Hosted a static portfolio website on Amazon S3 and configured Amazon CloudFront as CDN for fast content delivery. Connected custom domain using Route 53 and implemented IAM policies for secure access.</p>
+                            <a href="#" class="btn" style="font-size: 0.8rem;">View Details</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Project 1 -->
+                    <div class="project-card scroll-anim anim-hidden">
+                        <div class="project-img">
+                            <img src="image/simplecal.png" alt="Simple Calculator">
+                        </div>
+                        <div class="project-info">
+                            <h3>Simple Calculator</h3>
+                            <div class="tech-stack">
+                                <span>HTML</span> <span>CSS</span><span>JavaScript</span>
+                            </div>
+                            <p class="project-desc">The Simple Calculator is a web-based application that allows users to perform basic mathematical operations including addition, subtraction, multiplication, and division. Designed with a user-friendly interface, it serves both educational purposes for learning basic arithmetic and practical uses for quick calculations</p>
+                            <a href="#" class="btn" style="font-size: 0.8rem;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card scroll-anim anim-hidden anim-left">
+                        <div class="project-img">
+                            <img src="image/grocerystore.png" alt="General Store">
+                        </div>
+                        <div class="project-info">
+                            <h3>General Store Management</h3>
+                            <div class="tech-stack">
+                                <span>Python Flask</span> <span>SQLite</span> <span>MVC</span>
+                            </div>
+                            <p class="project-desc">Full-stack web-based grocery ordering system. Features include User/Admin authentication, Shopping Cart, Inventory management, and Order processing (COD).</p>
+                            <a href="#" class="btn" style="font-size: 0.8rem;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-card scroll-anim anim-hidden">
+                        <div class="project-img">
+                            <img src="image/expencetracker.png" alt="Split Expense">
+                        </div>
+                        <div class="project-info">
+                            <h3>Split Expense Tracker</h3>
+                            <div class="tech-stack">
+                                <span>Python</span> <span>JSON/DB</span>
+                            </div>
+                            <p class="project-desc">A web-based management system for tracking shared expenses and managing budgets using Python and database technologies.</p>
+                            <a href="#" class="btn" style="font-size: 0.8rem;">View Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 (Portfolio) -->
+                    <div class="project-card scroll-anim anim-hidden anim-left">
+                        <div class="project-img">
+                            <img src="image/pf.png" alt="Portfolio">
+                        </div>
+                        <div class="project-info">
+                            <h3>Portfolio Website</h3>
+                            <div class="tech-stack">
+                                <span>HTML/CSS</span> <span>JS</span>
+                            </div>
+                            <p class="project-desc">A responsive personal portfolio website developed to showcase projects and skills, featuring an AWS-themed design and animation controls.</p>
+                            <a href="#" class="btn" style="font-size: 0.8rem;">Current Site</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <div class="container">
+                <h2 class="section-title">Experience</h2>
+                <div class="timeline">
+                    
+                    <div class="timeline-item scroll-anim anim-hidden">
+                        <div class="content-box">
+                            <div class="date">Virtual</div>
+                            <h3 class="role">Web Developer Intern</h3>
+                            <p class="company">Unified Mentorship-Aug-2025</p>
+                            <p>Worked on Expense Tracker is a web-based application designed to help users manage and track their daily expenses efficiently. The application allows users to add, view, and delete expense records, making it easier to monitor personal spending and maintain financial control.
+
+This project is built using Python with Flask for the backend and standard web technologies for the frontend. It demonstrates how backend frameworks can handle user data and interact with a simple web interface to create a practical financial management tool..</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item scroll-anim anim-hidden anim-left">
+                        <div class="content-box">
+                            <div class="date">Past Experience</div>
+                            <h3 class="role">Data Entry Operator cum Clerk current working</h3>
+                            <p class="company">Kasturba Hospital, Sewagram-</p>
+                            <ul>
+                                <li>Managed data records and performed data analysis using Excel.</li>
+                                <li>Handled cash records and MIS reporting.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item scroll-anim anim-hidden">
+                        <div class="content-box">
+                            <div class="date">2024 - Pursuing</div>
+                            <h3 class="role">Master of Computer Management (MCM)</h3>
+                            <p class="company">Gandhigram College, Wardha</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item scroll-anim anim-hidden anim-left">
+                        <div class="content-box">
+                            <div class="date">2022</div>
+                            <h3 class="role">Bachelor of Arts (Sociology)</h3>
+                            <p class="company">Yashwantrao Chavan Open University</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications & Strengths -->
+        <section id="certifications" style="background-color: var(--aws-gray);">
+            <div class="container">
+                <h2 class="section-title">Certifications & Strengths</h2>
+                <div class="grid-2-col">
+                    <div>
+                        <h3 style="margin-bottom: 20px; color: var(--aws-navy);"><i class="fa-solid fa-certificate" style="color:var(--aws-orange)"></i> Certifications</h3>
+                        <ul class="cert-list scroll-anim anim-hidden">
+                            <li><i class="fa-solid fa-check-circle"></i> Web Development Internship Certificate
+                                <a href="image/um.pdf" class="btn btn-outline" target="_blank" style="margin-left:auto; font-size:0.8rem; padding:6px 14px;">View</a>
+                            </li>
+                            <li><i class="fa-solid fa-check-circle"></i> Beginner AWS Cloud Computing – Udemy
+                                <a href="image/udemy.jpeg" class="btn btn-outline" target="_blank" style="margin-left:auto; font-size:0.8rem; padding:6px 14px;">View</a>
+                            </li>
+                            <li><i class="fa-solid fa-check-circle"></i> Cloud Career Elevator – Cloud Folks HUB
+                                <a href="image/cf.png" class="btn btn-outline" target="_blank" style="margin-left:auto; font-size:0.8rem; padding:6px 14px;">View</a>
+                            </li>
+                            <li><i class="fa-solid fa-check-circle"></i> Yuva for All – NASSCOM FutureSkills Prime
+                                <a href="image/ai.pdf" class="btn btn-outline" target="_blank" style="margin-left:auto; font-size:0.8rem; padding:6px 14px;">View</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: 20px; color: var(--aws-navy);"><i class="fa-solid fa-star" style="color:var(--aws-orange)"></i> Strengths & Hobbies</h3>
+                        <ul class="strength-list scroll-anim anim-hidden anim-left">
+                            <li><i class="fa-solid fa-bolt"></i> Quick learner</li>
+                            <li><i class="fa-solid fa-puzzle-piece"></i> Strong problem-solving ability</li>
+                            <li><i class="fa-solid fa-users"></i> Team collaboration</li>
+                            <li><i class="fa-solid fa-microphone-lines"></i> Communication skills</li>
+                            <li style="margin-top: 10px; font-style: italic; color: #666;">Hobbies: Singing, Painting, Learning new technologies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer / Contact -->
+    <footer id="contact">
+        <div class="container">
+            <h2 style="color: white; margin-bottom: 20px;">Get In Touch</h2>
+            <div class="contact-info">
+                <p><i class="fa-solid fa-phone"></i> +91 8855975695</p>
+                <p><i class="fa-solid fa-envelope"></i> www.surajsute2@gmail.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> At-Sewagram, Dist- Wardha, Maharashtra, India</p>
+            </div>
+            <div class="social-links" style="margin-top: 30px;">
+                <a href="mailto:www.surajsute2@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/suraj-sute-ba398ba3" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/surajsute20" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.7;">&copy; 2026 Suraj Sute. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Animation Logic -->
+    <script>
+        // --- 1. Animation Toggle Logic ---
+        let animationsEnabled = true;
+
+        function togglePanel() {
+            const content = document.getElementById('panelContent');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        }
+
+        function toggleAnimations() {
+            const switchElem = document.getElementById('animSwitch');
+            animationsEnabled = switchElem.checked;
+            applyAnimationState();
+        }
+
+        function applyAnimationState() {
+            const elements = document.querySelectorAll('.scroll-anim');
+            
+            if (animationsEnabled) {
+                elements.forEach(el => {
+                    el.classList.remove('no-anim');
+                    // If it's already in view and we are re-enabling, we might want to hide it again to animate
+                    // or just leave it static. Let's leave it static but allow scroll trigger.
+                    // We re-add the hidden class only if it's not currently visible via IntersectionObserver logic
+                    if (!el.classList.contains('anim-visible')) {
+                        el.classList.add('anim-hidden');
+                    }
+                });
+            } else {
+                elements.forEach(el => {
+                    el.classList.add('no-anim');
+                    el.classList.remove('anim-hidden', 'anim-visible', 'anim-left');
+                });
+            }
+        }
+
+        // --- 2. Intersection Observer for Scroll Animations ---
+        
+        // Options for the observer
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // If animations are disabled, do nothing
+                if (!animationsEnabled) return;
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('anim-hidden');
+                    entry.target.classList.add('anim-visible');
+                    // Optional: Stop observing once animated
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        // Select elements to animate
+        function initObserver() {
+            const animatedElements = document.querySelectorAll('.scroll-anim');
+            animatedElements.forEach(el => {
+                // Ensure they start with the hidden class if animations are on
+                if (animationsEnabled) {
+                    el.classList.add('anim-hidden');
+                }
+                observer.observe(el);
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            initObserver();
+        });
+
+    </script>
+</body>
+</html>
